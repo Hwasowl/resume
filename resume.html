@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박정수 | Backend Engineer</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+<style>
+  /* ===== modern-resume-theme 기반 ===== */
+  body {
+    background: #ffffff;
+    color: #333;
+    font-family: 'Noto Sans KR', Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  .container { margin-top: 30px; }
+  .header-container { margin-top: 50px; }
+  .header-left { margin-top: 30px; }
+  .header-right { text-align: right; }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+  }
+  h1 { font-size: 4rem; margin-bottom: 0.1rem; font-weight: 500; }
+  h2 { font-weight: 300; font-size: 2rem; }
+  h3 {
+    font-weight: 300;
+    font-size: 3rem;
+    text-align: center;
+    border-bottom: dashed 2px #CCCCCC;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+  }
+  h4 { font-weight: 300; font-size: 2.5rem; margin-bottom: 3px; }
+  p, ul { font-size: 1.6rem; text-align: justify; }
+  a { color: #477dca; text-decoration: none; transition: color 150ms ease; }
+  a:hover, a:focus { color: #355e98; }
+  a i { font-size: 1.6rem; }
+
+  mark {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #fff;
+    background-color: #333;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+  }
+
+  /* Icons (top-right contact) */
+  ul.icons { padding: 0; margin-bottom: 20px; text-align: right; list-style: none; }
+  ul.icons li { display: inline-block; padding-left: 0.75rem; }
+  ul.icons a {
+    display: inline-block;
+    width: 2.75rem;
+    height: 2.75rem;
+    line-height: 2.8rem;
+    text-align: center;
+    border-radius: 100%;
+    color: #aaa;
+    transition: background-color 0.25s ease-in-out;
+  }
+  ul.icons a:hover { background: rgba(0,0,0,0.025); color: #333; }
+  ul.icons i { font-size: 22px; line-height: 44px; }
+
+  .header-right p { font-size: 1.6rem; text-align: right; margin-bottom: 3px; }
+  .header-right a { color: inherit; font-weight: 500; }
+
+  /* Profile image */
+  .profile-img {
+    width: 190px;
+    height: 240px;
+    margin: 0 auto 20px;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+  }
+  .profile-placeholder {
+    width: 140px;
+    height: 180px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #477dca 0%, #355e98 100%);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 4.5rem;
+    font-weight: 500;
+  }
+
+  /* Layout — 핵심: 왼쪽 details + 오른쪽 content */
+  .list-container h3 { margin-bottom: 0; }
+  .layout {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+  }
+  .layout .details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  .layout .details p {
+    margin-bottom: 3px;
+    font-size: 1.6rem;
+    text-align: inherit;
+    font-weight: 300;
+  }
+  .layout .details p b { font-weight: 500; }
+  .layout .details h4 {
+    margin-bottom: 0.1rem;
+    font-weight: 500;
+    font-size: 2.5rem;
+  }
+  .layout .details .caption-img {
+    margin-top: 12px;
+    max-width: 100%;
+    border-radius: 4px;
+    border: 1px solid #eee;
+  }
+  .layout .details .stack {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #777;
+    margin-top: 8px;
+  }
+  .layout-left { flex-direction: row; }
+  .layout-left .details { margin-bottom: 2rem; }
+  @media screen and (max-width: 767px) {
+    .layout-left { flex-direction: column; }
+    .layout-left .details { text-align: center !important; }
+    .layout-left .details p { text-align: center !important; }
+  }
+
+  /* Content side */
+  .content ul { padding-left: 20px; }
+  .content ul ul { padding-left: 20px; margin-top: 2px; }
+  .content li { margin: 2px 0; }
+  .content p { font-size: 1.6rem; }
+
+  /* Project description sub-sections */
+  .content .sub-section {
+    font-weight: 500;
+    font-size: 1.7rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.4rem;
+    color: #222;
+  }
+  .content .sub-section:first-child { margin-top: 0; }
+
+  code {
+    background: #f1f3f5;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 0.9em;
+    color: #c7254e;
+  }
+
+  /* Mermaid diagram boxes — caption 위치(왼쪽 사이드)에 배치 */
+  .mermaid-side {
+    margin-top: 14px;
+    background: #fafbfc;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 11px;
+    overflow-x: auto;
+  }
+  .mermaid-side .mermaid { font-size: 11px; }
+
+  /* Borders between items */
+  .border-weak { padding-bottom: 8px; border-bottom: dashed 1px #CCCCCC; }
+  .border-no { border-bottom: none; }
+
+  /* 다날 매칭 강조 배지 */
+  .pick-badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 8px;
+    background: #fff3a3;
+    color: #6b4f00;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .footer-container { margin-top: 100px; padding-bottom: 40px; }
+  .footer-container p { text-align: center; font-style: italic; font-weight: 300; font-size: 1.4rem; color: #999; }
+
+  @media print {
+    body { font-size: 0.9rem; }
+    .container { margin-top: 20px; }
+    .no-print { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="container header-container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8 header-left">
+      <h1>박정수</h1>
+      <h2>Backend Engineer</h2>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 header-right"> 
+      <p>📮 <a href="mailto:hwasowl598@gmail.com">hwasowl598@gmail.com</a></p>
+      <p>💻 <a href="https://github.com/Hwasowl" target="_blank">github.com/Hwasowl</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INTRO ===== -->
+<div class="container intro-container">
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-4 col-md-3 no-print">
+      <span class="profile-img" style="background-image: url(images/profile.png)"></span>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
+      <h3>소개</h3>
+      <p><b>주도적으로 문제를 해결하는 4년차 백엔드 개발자 박정수입니다.</b></p>
+      <p>초기 모빌리티 스타트업에 합류해 32명 규모로 회원 <mark>150만</mark>, 매출 <mark>200억 원</mark> 서비스를 만들었습니다. 신규 서비스의 <b>설계부터 런칭, 운영 안정화</b>까지 전 과정에 주도적으로 참여했습니다.</p>
+      <p>바닥부터 만들어 본 경험을 바탕으로, 단순 구현보다 <b>문제의 근본 원인을 찾고 구조로 해결</b>하는 것을 선호합니다. 모놀리식 분리, 조회 최적화 등 트래픽이 몰리는 도메인에서 안정화 경험을 쌓아왔습니다.</p>
+      <p>운영 데이터로 검증하며 <b>단계적으로 결정하는 스타일</b>을 가지고 있습니다. 한 번에 완벽한 해답을 찾기보다, 작게 도입한 뒤 한계가 드러나는 지점을 다음 단계의 근거로 삼아 구조를 발전시켜 왔습니다. 최근에는 AI Agent를 적극적으로 활용해 반복 작업과 CS 응대를 자동화하고, 익힌 활용법을 팀에 공유하며 함께 생산성을 끌어올리고 있습니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 실무 경력 ===== -->
+<div class="container list-container">
+  <h3>실무 경력</h3>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>씨앤에프시스템</h4>
+      <p><b>백엔드 개발자</b></p>
+      <p>2025.12 - 재직 중</p>
+      <p style="font-size: 1.3rem; color: #777; margin-top: 8px;">국민연금공단, 한전MCS 등 197개 기관이 사용 중인 공공 ERP 솔루션</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>196개 기관이 사용하는 중앙 및 지방 공공기관용 ERP 솔루션 (재무회계, 예산 모듈)</li>
+        <li>전자정부 프레임워크 / MyBatis / Oracle 환경의 신규 기능 추가 및 안정화</li>
+        <li><mark>AI Agent</mark>를 활용해 반복적인 개발 작업과 CS 응대를 자동화, 팀 내 도구 도입을 주도</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>디어코퍼레이션</h4>
+      <p><b>백엔드 개발자</b></p>
+      <p>2020.09 - 2024.01</p>
+      <p style="font-size: 1.3rem; color: #777; margin-top: 8px;">회원 150만, 매출 200억 원의 24시간 공유 모빌리티 서비스</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>결제 시스템 신규 설계 및 <mark>모놀리식 분리</mark></li>
+        <li>멤버십, 지도 조회, 권역 이탈 반납 감지 등 코어 도메인 신규 설계 및 개발</li>
+        <li>Redis 캐싱 + SQS 비동기 이벤트 기반 응답 최적화</li>
+        <li>AWS 운영 및 CI/CD 파이프라인 구축</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 기술 역량 ===== -->
+<div class="container list-container">
+  <h3>기술 역량</h3>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>언어 & 프레임워크</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>Java, Spring Boot, Spring Batch, JPA, MyBatis</li>
+        <li>Node.js, Express</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>데이터베이스</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>MySQL, Oracle, Redis</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>클라우드 & 인프라</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li><b>AWS:</b> EC2, ALB, ASG, S3, SQS, RDS</li>
+        <li><b>CI/CD:</b> Jenkins, Docker, GitHub Actions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>성능 & 안정성</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li><b>데이터베이스 튜닝:</b> 쿼리 플랜 분석, 인덱스 최적화</li>
+        <li><b>트래픽 처리:</b> Rate Limiting, Load Balancing, Redis 캐싱</li>
+        <li><b>모니터링:</b> API 로깅 시스템, Slack 알림 연동, 분산 정합성 알림</li>
+        <li><b>비동기:</b> SQS, DLQ 재시도, 멱등성 키 기반 중복 방지</li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>테스트 & 품질</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>JUnit 5, TestContainer, Locust, Jest, Mocha</li>
+        <li>결제 시스템 단위 및 통합 테스트 <mark>커버리지 95%</mark> 유지</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>개발 생산성</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>Claude Code, AI Agent 활용 자동화</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 프로젝트 1: 결제 시스템 MSA ===== -->
+<div class="container list-container">
+  <h3>디어코퍼레이션 프로젝트 상세</h3>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>결제 시스템 신규 구축</h4>
+      <p><b>두 서버에 흩어진 결제, 환불, 정산을<br>단일 결제 서비스로 통합</b></p>
+      <p class="stack">Java 17, Spring Boot, JUnit 5, TestContainer, Aurora MySQL 8.0, Redis, SQS</p>
+      <div class="mermaid-side">
+        <div class="mermaid">
+flowchart TD
+    subgraph BEFORE [분리 전]
+      M1[모놀리식<br/>결제 로직]
+      A1[어드민 서버<br/>환불, 정산 로직]
+      M1 -.PG 추가/변경 시<br/>둘 다 수정.- A1
+    end
+    BEFORE -->|결제 서비스 분리| AFTER
+
+    subgraph AFTER [분리 후]
+      U[유저] -->|반납 요청| M2[모놀리식]
+      M2 -->|결제 요청| P[결제 서버]
+      P -.ChainedTx.-> N[(결제 DB)]
+      P -.ChainedTx.-> L[(레거시 DB)]
+      P -->|부분 커밋| SL[Slack]
+      P ==결제 이벤트==> Q[SQS]
+      Q --> S[정산 서버]
+      Q -.실패.-> DLQ
+    end
+
+    style P fill:#e3f2fd
+    style Q fill:#fff3a3
+    style SL fill:#ffebee
+    style DLQ fill:#ffebee
+    style M1 fill:#f8d7da
+    style A1 fill:#f8d7da
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <p class="sub-section">프로젝트 개요</p>
+      <p>결제 로직은 모놀리식, 환불과 정산은 어드민 서버에 흩어져 있어 PG사 추가나 변경 시 양쪽을 모두 수정해야 하는 구조. 결제 도메인 전체를 별도 결제 서비스로 분리.</p>
+
+      <p class="sub-section">팀 구성 및 역할</p>
+      <ul>
+        <li>3명 백엔드 팀으로 진행</li>
+        <li>본인은 환불 도메인 전반과 카카오페이 PG 연동, Java 엔티티 모델링 담당</li>
+      </ul>
+
+      <p class="sub-section">주요 업무</p>
+      <ul>
+        <li>Node.js 모놀리식의 결제 개념을 Java 엔티티와 값 객체로 재모델링</li>
+        <li>환불 케이스(부분 환불, 결제수단별, 0원 결제) 결제 서버 환불 도메인으로 통합</li>
+        <li>카카오페이 PG 연동 및 PG 호출 인터페이스 캡슐화</li>
+      </ul>
+
+      <p class="sub-section">문제 해결 과정</p>
+      <ul>
+        <li><b>두 DB 동시 갱신 정합성</b>
+          <ul>
+            <li>ChainedTransactionManager로 결제 DB와 레거시 DB 동시 갱신 (2PC는 외부 의존성 회피로 미선택)</li>
+            <li>부분 커밋 발생 시 트랜잭션 예외로 Slack 알림 발송</li>
+          </ul>
+        </li>
+        <li><b>정산 비동기 분리</b>
+          <ul>
+            <li>결제 완료 시점에 SQS로 결제 이벤트 발행, 정산 서버 비동기 컨슘</li>
+            <li>실패는 DLQ 재시도와 청구서 ID 기반 멱등성 키로 중복 정산 방지</li>
+          </ul>
+        </li>
+        <li><b>테스트로 도메인 정확성 보장</b>
+          <ul>
+            <li>TestContainer 기반 통합 테스트로 모놀리식 호출부터 두 DB 갱신, SQS 발행까지 검증</li>
+            <li>단위와 통합 테스트 300개 이상 작성, <mark>커버리지 95%</mark> 유지</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="sub-section">기여 성과</p>
+      <ul>
+        <li>결제 도메인 단일화로 <mark>PG사 추가 시 한 곳만 수정</mark> (카카오페이 추가로 검증)</li>
+        <li>모놀리식은 그대로 두고 결제만 분리해 <mark>무중단</mark>으로 전환</li>
+        <li>정산 비동기화로 <mark>응답 속도 3.8s → 0.7s</mark></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 프로젝트 2: 권역 이탈 반납 ===== -->
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>권역 이탈 반납 자동 격리</h4>
+      <p><b>구역 밖에 버려진 킥보드를<br>다음 유저가 못 빌리도록 자동 잠금</b></p>
+      <p class="stack">Node.js, Express, MySQL Spatial Index, Read Replica</p>
+      <div class="mermaid-side">
+        <div class="mermaid">
+sequenceDiagram
+    autonumber
+    participant U as 사용자
+    participant R as 4개 반납 경로
+    participant A as 반납 정책 레이어
+    participant DB as Read Replica
+    participant W as Write DB
+    U->>R: 반납 요청
+    R->>A: 통합 진입 함수
+    A->>DB: ST_CONTAINS<br/>(buffer, GPS)
+    DB-->>A: 구역 안/밖
+    alt 구역 밖
+      A->>W: 킥보드 잠금
+    else 구역 안
+      A->>W: 정상 처리
+    end
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <p class="sub-section">프로젝트 개요</p>
+      <p>킥보드가 운영 구역 밖에 반납되면 자동 잠금해 다음 유저가 빌리지 못하게 격리. 현장 직원이 정상 위치로 옮기면 자동 해제.</p>
+
+      <p class="sub-section">팀 구성 및 역할</p>
+      <ul>
+        <li>단독으로 도메인 로직, 공간 쿼리, 4개 반납 경로 통합 담당</li>
+        <li>운영팀과 허용 반경 정책 협의 / 어드민과 CX 팀과 시각화 UX 협의</li>
+      </ul>
+
+      <p class="sub-section">주요 업무</p>
+      <ul>
+        <li>반납 시점 GPS가 운영 구역 안인지 판별 후 구역 밖이면 킥보드 자동 잠금</li>
+        <li>유저, 서버, 직원 종료 등 4개 반납 경로 정책을 공통 레이어로 일원화</li>
+        <li>어드민과 CX 화면에 반납 위치 마커와 구역 폴리곤 시각화</li>
+      </ul>
+
+      <p class="sub-section">문제 해결 과정</p>
+      <ul>
+        <li><b>GPS 소스 선택</b>
+          <ul>
+            <li>사용자 앱 GPS는 실내나 터널에서 100m 이상 튀어 정상 유저 오탐 발생</li>
+            <li>킥보드 단말기 GPS 1순위에 마지막 위치 보조 신호 OR 조합으로 오탐 차단</li>
+          </ul>
+        </li>
+        <li><b>경계선 vs 여유 버퍼</b>
+          <ul>
+            <li>경계선 정확 판별은 GPS 오차 1~2m로 정상 유저까지 잠김</li>
+            <li>경계선과 여유 폭 N m 버퍼 폴리곤을 별도 컬럼으로 운영, 판별은 buffer 기준</li>
+            <li><code>ST_CONTAINS</code>와 MySQL Spatial Index로 구역 수 증가에도 O(log n) 보장</li>
+          </ul>
+        </li>
+        <li><b>운영 트랜잭션 부하 분리</b>
+          <ul>
+            <li>공간 판별 쿼리는 Read Replica로 분리, Write DB는 상태 갱신만 처리</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="sub-section">기여 성과</p>
+      <ul>
+        <li>운영팀 수동 모니터링이 <mark>반납 즉시 자동 격리</mark>로 대체</li>
+        <li>이후 친구공유나 예약 반납 같은 신규 경로에 동일 정책 자동 적용 가능한 구조 확보</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 프로젝트 3: 지도 영역 조회 ===== -->
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>지도 영역 조회 최적화</h4>
+      <p><b>Full Scan 장애<br>처리 속도 6s → 0.4s (15배)</b></p>
+      <p class="stack">Java 17, Spring Boot, Redis, MySQL 5.7</p>
+      <img class="caption-img" src="images/map-screenshot.jpg" alt="디어 앱 지도 화면" style="max-width: 60%; display: block; margin: 12px auto 0;">
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <p class="sub-section">프로젝트 개요</p>
+      <p>회원 규모 증가로 Full Scan 방식 지도 영역 조회 API가 RDS 부하와 장애를 유발. 캐싱 전략을 단계적으로 진화시키며 근본 원인까지 해결.</p>
+
+      <p class="sub-section">팀 구성 및 역할</p>
+      <ul>
+        <li>단독으로 원인 분석, 캐싱 전략 수립, 점진적 마이그레이션 담당</li>
+      </ul>
+
+      <p class="sub-section">주요 업무</p>
+      <ul>
+        <li>운영 구역 폴리곤, 가맹점, 킥보드 위치 데이터를 매 화면 진입마다 응답하던 API 최적화</li>
+      </ul>
+
+      <p class="sub-section">문제 해결 과정</p>
+      <ul>
+        <li><b>1단계: 로컬 캐싱</b>
+          <ul>
+            <li>변경 빈도 낮은 지역 데이터에 WAS 로컬 캐싱 적용으로 <mark>6s → 0.4s</mark></li>
+            <li>주차 규제 변경이 잦아지며 WAS 증설 시 인스턴스별 캐시 불일치 발생</li>
+          </ul>
+        </li>
+        <li><b>2단계: Redis 글로벌 캐싱</b>
+          <ul>
+            <li>WAS 간 일관성 확보로 캐시 불일치 해소</li>
+            <li>가맹점 증가로 응답 크기가 커지며 프론트 렌더링 지연 발생</li>
+          </ul>
+        </li>
+        <li><b>3단계: 공간 쿼리</b>
+          <ul>
+            <li>MySQL Geometry 함수로 사용자 인접 지역만 조회하도록 변경</li>
+            <li>응답 크기 자체를 축소해 렌더링 지연 해소</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="sub-section">기여 성과</p>
+      <ul>
+        <li>처리 속도 <mark>6s → 0.4s</mark> (15배 개선)</li>
+        <li>RDS Full Scan으로 인한 장애 재발 차단</li>
+        <li>각 단계의 한계를 다음 단계 근거로 삼은 단계적 의사결정</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 프로젝트 4: 멤버십 ===== -->
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>멤버십 시스템 개발</h4>
+      <p><b>Redis Sorted Set 정원제 랭킹<br>이용률 14% 증가</b></p>
+      <p class="stack">Node.js, Express, Node-cron, Jest, Redis, MySQL 5.7</p>
+      <div class="mermaid-side">
+        <div class="mermaid">
+flowchart LR
+    U[회원 이용] --> B["월간 배치"]
+    B --> Z["Redis Sorted Set<br/>score = 이용 실적"]
+    Z --> R["상위 100명"]
+    R --> P["✅ 등급 유지"]
+    Z --> F["⬇ 강등"]
+    Z --> N["⬆ 승급"]
+    style Z fill:#fff3a3
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <p class="sub-section">프로젝트 개요</p>
+      <p>신규 고객 확보와 이용 유도를 위한 멤버십 등급제 신규 설계. 최상위 등급은 정원 100명으로 제한된 랭킹제로 운영.</p>
+
+      <p class="sub-section">팀 구성 및 역할</p>
+      <ul>
+        <li>단독으로 등급 정책 설계, 승강급 자동화, 등급별 혜택 연동 담당</li>
+      </ul>
+
+      <p class="sub-section">주요 업무</p>
+      <ul>
+        <li>이용 횟수 기반 자동 승급 로직 설계</li>
+        <li>정원 100명 제한 최상위 등급의 랭킹제 운영</li>
+        <li>등급별 포인트 적립 비율 조정과 이용권 지급 등 혜택 연동</li>
+      </ul>
+
+      <p class="sub-section">문제 해결 과정</p>
+      <ul>
+        <li><b>Redis Sorted Set 정원제</b>
+          <ul>
+            <li>매번 SQL 정렬은 회원 증가에 비례해 부하 ↑</li>
+            <li>Sorted Set으로 이용 실적을 score로 적재, 매월 배치로 한 번에 갱신</li>
+            <li>상위 100명 유지, 정원 밖 강등, 신규 진입 승급을 자동화</li>
+          </ul>
+        </li>
+        <li><b>혜택 정책 메타 테이블 분리</b>
+          <ul>
+            <li>등급별 적립 비율과 이용권 지급 정책을 메타 테이블로 분리해 코드 배포 없이 정책 변경 가능</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="sub-section">기여 성과</p>
+      <ul>
+        <li><mark>도입 대비 이용률 14% 증가</mark></li>
+        <li>Redis Sorted Set 기반 정원제로 회원 규모와 무관한 일정한 부하 확보</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- ===== 자격 ===== -->
+<div class="container list-container">
+  <h3>자격</h3>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>정보처리기사</h4>
+      <p>2025.09</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul><li>국가기술자격</li></ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>SQLD</h4>
+      <p>2024.06</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul><li>SQL 개발자</li></ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>TOEIC Speaking</h4>
+      <p>2025.12</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul><li>IM2</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 학력 ===== -->
+<div class="container list-container">
+  <h3>학력</h3>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>가톨릭대학교</h4>
+      <p><b>IT파이낸스 (학사)</b></p>
+      <p>2025.03 - 2027.02 (졸업예정)</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>학점 3.49 / 4.5</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>동양미래대학교</h4>
+      <p><b>컴퓨터정보공학 (전문학사)</b></p>
+      <p>2022.03 - 2024.02</p>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <ul>
+        <li>학점 3.89 / 4.5</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 푸터 ===== -->
+<div class="container footer-container">
+  <p>Last updated: 2026.06.13 — Modeled after <a href="https://ghojeong.github.io/">ghojeong.github.io</a></p>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    themeVariables: {
+      fontFamily: 'Noto Sans KR, sans-serif',
+      fontSize: '11px',
+      primaryColor: '#e3f2fd',
+      primaryTextColor: '#222',
+      lineColor: '#999'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false, messageFontSize: 10, actorFontSize: 11 }
+  });
+</script>
+</body>
+</html>
