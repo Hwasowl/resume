@@ -318,19 +318,19 @@
     </div>
   </div>
 
-  <div class="row clearfix layout layout-left border-no">
-    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>성능 & 안정성</h4>
-    </div>
-    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
-      <ul>
-        <li><b>데이터베이스 튜닝:</b> 쿼리 플랜 분석, 인덱스 최적화</li>
-        <li><b>트래픽 처리:</b> Rate Limiting, Load Balancing, Redis 캐싱</li>
-        <li><b>비동기 처리:</b> SNS/SQS, DLQ 핸들링, 멱등성 처리</li>
-        <li><b>모니터링:</b> 커스텀 메트릭, Slack 알림 연동</li>
-      </ul>
-    </div>
-  </div>
+<!--  <div class="row clearfix layout layout-left border-no">-->
+<!--    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">-->
+<!--      <h4>성능 & 안정성</h4>-->
+<!--    </div>-->
+<!--    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">-->
+<!--      <ul>-->
+<!--        <li><b>데이터베이스 튜닝:</b> 쿼리 플랜 분석, 인덱스 최적화</li>-->
+<!--        <li><b>트래픽 처리:</b> Rate Limiting, Load Balancing, Redis 캐싱</li>-->
+<!--        <li><b>비동기 처리:</b> SNS/SQS, DLQ 핸들링, 멱등성 처리</li>-->
+<!--        <li><b>모니터링:</b> 커스텀 메트릭, Slack 알림 연동</li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="row clearfix layout layout-left border-no">
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
@@ -338,8 +338,8 @@
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
       <ul>
-        <li>JUnit 5, TestContainer, Locust, Jest, Mocha</li>
-        <li>결제 시스템 단위 및 통합 테스트 <mark>커버리지 95%</mark> 유지</li>
+        <li>JUnit 5, TestContainer, Locust, K6</li>
+<!--        <li>결제 시스템 단위 및 통합 테스트 <mark>커버리지 95%</mark> 유지</li>-->
       </ul>
     </div>
   </div>
@@ -350,7 +350,7 @@
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
       <ul>
-        <li>Claude Code, 반복성 업무 자동화 (Flyweight를 활용한 E2E 테스트 등)</li>
+        <li>Claude Code</li>
       </ul>
     </div>
   </div>
@@ -362,8 +362,8 @@
 
   <div class="row clearfix layout layout-left border-no">
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>대량 전표 승인 최적화</h4>
-      <p>건별 처리로 1만 건 90초/OOM →<br>청크 배치로 2초 개선</p>
+      <h4>회계 전표 승인 최적화</h4>
+      <p>레거시 로직을 배치 처리로 전환하며 결산 시즌 운영 효율화</p>
       <p class="stack">Java, Spring, MyBatis, Oracle / MariaDB / MSSQL</p>
       <div class="mermaid-side">
         <div class="mermaid">
@@ -398,13 +398,13 @@ flowchart TB
 
       <p class="sub-section">팀 구성 및 역할</p>
       <ul>
-        <li>단독 수행 — 병목 진단, 배치 구조 설계, 성능 최적화</li>
+        <li>단독으로 병목 진단, 배치 구조 설계, 성능 최적화</li>
       </ul>
 
       <p class="sub-section">주요 업무</p>
       <ul>
         <li>건별로 동작하던 전표 승인, 취소 로직의 병목 진단</li>
-        <li>건수마다 형태가 변하던 MyBatis 동적 쿼리를 고정 SQL + BATCH 실행으로 재설계해 실행계획 재사용 유도</li>
+        <li>건수마다 형태가 변하던 MyBatis 동적 쿼리를 소프트 파싱 SQL + BATCH 실행으로 개선하며 효율화</li>
       </ul>
 
       <p class="sub-section">문제 해결 과정</p>
@@ -426,17 +426,12 @@ flowchart TB
             <li>SAVEPOINT 부분 롤백으로 실패한 전표만 스킵하고 나머지는 처리를 지속, 실패 전표번호는 따로 수집해 안내</li>
           </ul>
         </li>
-        <li><b>BATCH 세션 flush로 메모리 제어</b>
-          <ul>
-            <li>1,000건마다 세션에 쌓인 누적분을 비워 힙 상한을 유지하고, 청크 크기를 조정하며 균형점 확인</li>
-          </ul>
-        </li>
       </ul>
 
       <p class="sub-section">기여 성과</p>
       <ul>
         <li>1만 건 이상 승인 처리 <mark>90초 → 2초</mark> (약 45배)</li>
-        <li>결산 피크의 OOM 실패 차단, 실패 건만 격리해 부분 실패가 전체 배치를 막지 않도록 운영 안정성 확보</li>
+        <li>결산 피크대의 운영 안정성 확보</li>
       </ul>
     </div>
   </div>
@@ -502,7 +497,7 @@ flowchart TD
         <li><b>정산 비동기 분리</b>
           <ul>
             <li>결제/환불 커밋 이후, SNS 토픽에 이벤트 발행 → 정산 서버가 구독 SQS로 컨슘</li>
-            <li>청구서 ID 기반 멱등성 키로 중복 정산을 방지하고, 처리 실패 시 DLQ를 통한 관리</li>
+            <li>청구서 ID 기반 멱등성 처리로 중복 정산을 방지, 처리 실패 시 DLQ를 통한 관리</li>
           </ul>
         </li>
         <li><b>테스트로 도메인 정확성 보장</b>
