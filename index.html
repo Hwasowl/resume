@@ -591,58 +591,58 @@ flowchart TB
     </div>
   </div>
 
-  <div class="row clearfix layout layout-left border-no">
-    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>반납지연 VOC 처리 효율화</h4>
-      <p>로그 연동을 통한 답변 프로세스 개선, VOC 처리량 56%↑</p>
-      <p class="stack">Node.js, Express, React(Ant Design), Amplitude, Datadog Logs API</p>
-      <img class="caption-img" src="images/voc-screenshot.png" alt="반납지연 VOC 응대 화면" style="max-width: 100%; display: block; margin: 12px auto 0;">
-    </div>
-    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
-      <p class="sub-section">프로젝트 개요</p>
-      <p>반납 실패 문의를 CS 작업자가 개발자 확인이나 수기 계산 없이, 종료 시점 추정부터 환불 차액 산정까지 한 화면에서 처리하도록 개선. CS 부서와 협업해 요구사항을 분석하고, 응대 화면 구성 및 구현</p>
+<!--  <div class="row clearfix layout layout-left border-no">-->
+<!--    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">-->
+<!--      <h4>반납지연 VOC 처리 효율화</h4>-->
+<!--      <p>로그 연동을 통한 답변 프로세스 개선, VOC 처리량 56%↑</p>-->
+<!--      <p class="stack">Node.js, Express, React(Ant Design), Amplitude, Datadog Logs API</p>-->
+<!--      <img class="caption-img" src="images/voc-screenshot.png" alt="반납지연 VOC 응대 화면" style="max-width: 100%; display: block; margin: 12px auto 0;">-->
+<!--    </div>-->
+<!--    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">-->
+<!--      <p class="sub-section">프로젝트 개요</p>-->
+<!--      <p>반납 실패 문의를 CS 작업자가 개발자 확인이나 수기 계산 없이, 종료 시점 추정부터 환불 차액 산정까지 한 화면에서 처리하도록 개선. CS 부서와 협업해 요구사항을 분석하고, 응대 화면 구성 및 구현</p>-->
 
-      <p class="sub-section">팀 구성 및 역할</p>
-      <ul>
-        <li>기획자 1명, 개발자 1명(본인)</li>
-        <li>로깅 연동, 적정 요금 역산 로직 작성, 응대 화면 구성</li>
-      </ul>
+<!--      <p class="sub-section">팀 구성 및 역할</p>-->
+<!--      <ul>-->
+<!--        <li>기획자 1명, 개발자 1명(본인)</li>-->
+<!--        <li>로깅 연동, 적정 요금 역산 로직 작성, 응대 화면 구성</li>-->
+<!--      </ul>-->
 
-      <p class="sub-section">주요 업무</p>
-      <ul>
-        <li>Amplitude, Datadog 로그와 위치 정지 패턴 분석으로 실이용 종료 시점 추정</li>
-        <li>지역 요금제로 적정 요금을 역산해 환불 차액을 CS 화면에 제시</li>
-        <li>반납 이슈 지도 마커 시각화, 중복 로그 호출 캐싱</li>
-      </ul>
+<!--      <p class="sub-section">주요 업무</p>-->
+<!--      <ul>-->
+<!--        <li>Amplitude, Datadog 로그와 위치 정지 패턴 분석으로 실이용 종료 시점 추정</li>-->
+<!--        <li>지역 요금제로 적정 요금을 역산해 환불 차액을 CS 화면에 제시</li>-->
+<!--        <li>반납 이슈 지도 마커 시각화, 중복 로그 호출 캐싱</li>-->
+<!--      </ul>-->
 
-      <p class="sub-section">문제 해결 과정</p>
-      <ul>
-        <li><b>실이용 종료 시점 추정</b>
-          <ul>
-            <li>종료 기록이 없는 건은 클라이언트와 서버 로그를 불러와 대조하고, 킥보드 GPS가 멈춘 위치와 시점으로 반납 시점 추정</li>
-            <li>반납 시도 위치와 정지 구간을 지도 마커로 표기해 응대자가 추정 근거를 화면에서 확인</li>
-          </ul>
-        </li>
-        <li><b>적정 요금 역산</b>
-          <ul>
-            <li>추정 종료 시각과 지역 요금제로 적정액을 계산, 부과액과의 차액을 표시해 수기 계산 제거</li>
-          </ul>
-        </li>
-        <li><b>중복 호출 캐싱</b>
-          <ul>
-            <li>동일 로그 반복 호출을 캐싱으로 묶어 외부 API 호출 감소</li>
-          </ul>
-        </li>
-      </ul>
+<!--      <p class="sub-section">문제 해결 과정</p>-->
+<!--      <ul>-->
+<!--        <li><b>실이용 종료 시점 추정</b>-->
+<!--          <ul>-->
+<!--            <li>종료 기록이 없는 건은 클라이언트와 서버 로그를 불러와 대조하고, 킥보드 GPS가 멈춘 위치와 시점으로 반납 시점 추정</li>-->
+<!--            <li>반납 시도 위치와 정지 구간을 지도 마커로 표기해 응대자가 추정 근거를 화면에서 확인</li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--        <li><b>적정 요금 역산</b>-->
+<!--          <ul>-->
+<!--            <li>추정 종료 시각과 지역 요금제로 적정액을 계산, 부과액과의 차액을 표시해 수기 계산 제거</li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--        <li><b>중복 호출 캐싱</b>-->
+<!--          <ul>-->
+<!--            <li>동일 로그 반복 호출을 캐싱으로 묶어 외부 API 호출 감소</li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
 
-      <p class="sub-section">기여 성과</p>
-      <ul>
-        <li>CS가 개발자 확인 없이 반납 이슈를 직접 처리해 문의 대응 병목 제거</li>
-        <li>적정 요금 역산으로 수기 계산 제거, 환불 정확도 확보</li>
-        <li>일 평균 VOC 처리 <mark>32건 → 50건 (약 56% 증가)</mark></li>
-      </ul>
-    </div>
-  </div>
+<!--      <p class="sub-section">기여 성과</p>-->
+<!--      <ul>-->
+<!--        <li>CS가 개발자 확인 없이 반납 이슈를 직접 처리해 문의 대응 병목 제거</li>-->
+<!--        <li>적정 요금 역산으로 수기 계산 제거, 환불 정확도 확보</li>-->
+<!--        <li>일 평균 VOC 처리 <mark>32건 → 50건 (약 56% 증가)</mark></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 
 <!-- ===== 오픈소스 기여 ===== -->
