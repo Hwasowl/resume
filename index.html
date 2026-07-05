@@ -345,95 +345,14 @@
   </div>
 </div>
 
-<!-- ===== 씨앤에프시스템 프로젝트 상세 ===== -->
 <div class="container list-container">
-  <h3>씨앤에프시스템 주요 프로젝트</h3>
-
-  <div class="row clearfix layout layout-left border-no">
-    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>회계 전표 승인 최적화</h4>
-      <p>레거시 로직을 배치 처리로 전환하며 결산 시즌 운영 효율화</p>
-      <p class="stack">Java, Spring, MyBatis, Oracle / MariaDB / MSSQL</p>
-      <div class="mermaid-side">
-        <div class="mermaid">
-flowchart TB
-    U([결산 담당자]) -->|1만+ 건 승인| LOAD
-    subgraph APP["애플리케이션"]
-      direction TB
-      LOAD["대상 전표 조회<br/>검증, 승인번호 채번"] --> CHUNK["1,000건 청크 분할"]
-      CHUNK --> BATCH["고정 SQL<br/>BATCH 누적"]
-      BATCH --> FLUSH["청크마다 flush<br/>메모리 제어"]
-    end
-    subgraph DBLAYER["DB"]
-      direction TB
-      CACHE["실행계획 캐시 히트<br/>하드파싱 제거"]
-      DBS[("Oracle / MariaDB / MSSQL")]
-      CACHE --> DBS
-    end
-    FLUSH ==>|고정 SQL 반복| CACHE
-    BATCH -. 실패 시 .-> SP["전체 롤백<br/>실패 전표 특정"]
-    style APP fill:#f5f9ff,stroke:#3b82f6
-    style DBLAYER fill:#f1f8f4,stroke:#27ae60
-    style BATCH fill:#e3f2fd
-    style FLUSH fill:#fff3a3
-    style CACHE fill:#fff3a3
-    style SP fill:#ffebee
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
-      <p class="sub-section">프로젝트 개요</p>
-      <p>결산 시즌, 회계 전표 1만 건 이상 일괄 처리 시 최대 90초가 소요되거나 OOM 문제가 발생하며 이를 개선</p>
-
-      <p class="sub-section">팀 구성 및 역할</p>
-      <ul>
-        <li>단독으로 병목 진단, 배치 구조 설계, 성능 최적화</li>
-      </ul>
-
-      <p class="sub-section">주요 업무</p>
-      <ul>
-        <li>건별로 동작하던 전표 승인, 취소 로직의 병목 진단</li>
-        <li>건수마다 형태가 변하던 MyBatis 동적 쿼리를 고정 SQL + BATCH 실행으로 개선하며 효율화</li>
-      </ul>
-
-      <p class="sub-section">문제 해결 과정</p>
-      <ul>
-        <li><b>병목 진단</b>
-          <ul>
-            <li>건수만큼 UPDATE 문을 이어붙이는 MyBatis 동적 쿼리라, 건수와 데이터에 따라 SQL 형태가 바뀌어 옵티마이저가 반복적으로 하드 파싱하는 문제 발생</li>
-          </ul>
-        </li>
-        <li><b>실행계획이 재사용되도록 SQL 실행 구조 변경</b>
-          <ul>
-            <li>건수마다 변하던 동적 UPDATE를 단일 UPDATE 문장으로 변경해, 매 실행 같은 PreparedStatement를 재사용</li>
-            <li>SQL 텍스트가 고정되어 DB가 소프트 파싱하므로, 건수만큼 반복되던 하드 파싱 문제 개선</li>
-          </ul>
-        </li>
-        <li><b>MyBatis Executor 충돌 → 트랜잭션 경계 분리</b>
-          <ul>
-            <li>상위 서비스의 조회가 SIMPLE executor로 먼저 실행돼 같은 트랜잭션에서 BATCH 전환이 막히는 문제를, 트랜잭션 전파 옵션 REQUIRES_NEW로 분리해 해결</li>
-            <li>실패 시 배치 전체를 롤백해 문서 정합성을 지키고, 실패한 전표번호를 특정해 안내</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p class="sub-section">기여 성과</p>
-      <ul>
-        <li>1만 건 이상 승인 처리 <mark>90초 → 2초</mark> (약 45배)</li>
-        <li>매년 발생하는 결산 피크 기간의 운영 안정성 확보</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="container list-container">
-  <h3>디어코퍼레이션 주요 프로젝트</h3>
+  <h3>주요 프로젝트</h3>
 
   <div class="row clearfix layout layout-left border-no">
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
       <h4>결제 시스템 마이그레이션</h4>
       <p>Node.js 모놀리식의 결제 도메인을<br>Java 결제 서비스로 마이그레이션</p>
-      <p class="stack">Java 17, Spring Boot, JUnit 5, TestContainer, Aurora MySQL 8.0, Redis, SQS</p>
+      <p class="stack">[디어코퍼레이션] Java 17, Spring Boot, JUnit 5, TestContainer, Aurora MySQL 8.0, Redis, SQS</p>
       <div class="mermaid-side">
         <div class="mermaid">
 flowchart TD
@@ -508,7 +427,7 @@ flowchart TD
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
       <h4>지역 조회 최적화</h4>
       <p>RDS 장애 해소, 조회 속도 6s → 0.4s</p>
-      <p class="stack">Java, Spring Boot, Redis, MySQL 5.7</p>
+      <p class="stack">[디어코퍼레이션] Java 17, Spring Boot, Redis, MySQL 5.7</p>
       <div class="mermaid-side">
         <div class="mermaid">
 %%{init: {'flowchart': {'curve': 'natural'}}}%%
@@ -587,6 +506,82 @@ flowchart TB
       <ul>
         <li>처리 속도 <mark>6s → 0.4s</mark> (15배 개선)</li>
         <li>조회 범위 축소로 Full Scan 원인을 제거, <mark>RDS 사용량 56% 절감</mark>으로 장애 재발 차단</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row clearfix layout layout-left border-no">
+    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
+      <h4>회계 전표 승인 최적화</h4>
+      <p>레거시 로직을 배치 처리로 전환하며 결산 시즌 운영 효율화</p>
+      <p class="stack">[씨앤에프시스템] Java 8, Spring, MyBatis, Oracle / MariaDB / MSSQL</p>
+      <div class="mermaid-side">
+        <div class="mermaid">
+          flowchart TB
+          U([결산 담당자]) -->|1만+ 건 승인| LOAD
+          subgraph APP["애플리케이션"]
+          direction TB
+          LOAD["대상 전표 조회<br/>검증, 승인번호 채번"] --> CHUNK["1,000건 청크 분할"]
+          CHUNK --> BATCH["고정 SQL<br/>BATCH 누적"]
+          BATCH --> FLUSH["청크마다 flush<br/>메모리 제어"]
+          end
+          subgraph DBLAYER["DB"]
+          direction TB
+          CACHE["실행계획 캐시 히트<br/>하드파싱 제거"]
+          DBS[("Oracle / MariaDB / MSSQL")]
+          CACHE --> DBS
+          end
+          FLUSH ==>|고정 SQL 반복| CACHE
+          BATCH -. 실패 시 .-> SP["전체 롤백<br/>실패 전표 특정"]
+          style APP fill:#f5f9ff,stroke:#3b82f6
+          style DBLAYER fill:#f1f8f4,stroke:#27ae60
+          style BATCH fill:#e3f2fd
+          style FLUSH fill:#fff3a3
+          style CACHE fill:#fff3a3
+          style SP fill:#ffebee
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
+      <p class="sub-section">프로젝트 개요</p>
+      <p>결산 시즌, 회계 전표 1만 건 이상 일괄 처리 시 최대 90초가 소요되거나 OOM 문제가 발생하며 이를 개선</p>
+
+      <p class="sub-section">팀 구성 및 역할</p>
+      <ul>
+        <li>단독으로 병목 진단, 배치 구조 설계, 성능 최적화</li>
+      </ul>
+
+      <p class="sub-section">주요 업무</p>
+      <ul>
+        <li>건별로 동작하던 전표 승인, 취소 로직의 병목 진단</li>
+        <li>건수마다 형태가 변하던 MyBatis 동적 쿼리를 고정 SQL + BATCH 실행으로 개선하며 효율화</li>
+      </ul>
+
+      <p class="sub-section">문제 해결 과정</p>
+      <ul>
+        <li><b>병목 진단</b>
+          <ul>
+            <li>건수만큼 UPDATE 문을 이어붙이는 MyBatis 동적 쿼리라, 건수와 데이터에 따라 SQL 형태가 바뀌어 옵티마이저가 반복적으로 하드 파싱하는 문제 발생</li>
+          </ul>
+        </li>
+        <li><b>실행계획이 재사용되도록 SQL 실행 구조 변경</b>
+          <ul>
+            <li>건수마다 변하던 동적 UPDATE를 단일 UPDATE 문장으로 변경해, 매 실행 같은 PreparedStatement를 재사용</li>
+            <li>SQL 텍스트가 고정되어 DB가 소프트 파싱하므로, 건수만큼 반복되던 하드 파싱 문제 개선</li>
+          </ul>
+        </li>
+        <li><b>MyBatis Executor 충돌 → 트랜잭션 경계 분리</b>
+          <ul>
+            <li>상위 서비스의 조회가 SIMPLE executor로 먼저 실행돼 같은 트랜잭션에서 BATCH 전환이 막히는 문제를, 트랜잭션 전파 옵션 REQUIRES_NEW로 분리해 해결</li>
+            <li>실패 시 배치 전체를 롤백해 문서 정합성을 지키고, 실패한 전표번호를 특정해 안내</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="sub-section">기여 성과</p>
+      <ul>
+        <li>1만 건 이상 승인 처리 <mark>90초 → 2초</mark> (약 45배)</li>
+        <li>매년 발생하는 결산 피크 기간의 운영 안정성 확보</li>
       </ul>
     </div>
   </div>
