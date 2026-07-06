@@ -225,7 +225,7 @@
       <p><b>주도적으로 문제를 해결하는 4년차 백엔드 개발자 박정수입니다.</b></p>
       <p>초기 모빌리티 스타트업에 합류해 32명 규모로 회원 <mark>150만</mark>, 매출 <mark>200억 원</mark> 서비스를 만들었습니다. 신규 서비스의 설계부터 런칭, 운영 안정화까지 전 과정에 주도적으로 참여했습니다.</p>
       <p>단순 구현보다 문제의 근본 원인을 찾고 구조로 해결하는 것을 선호합니다. 조회 최적화, 배치 전환 등 트래픽이 몰리는 도메인에서 성능 개선과 안정화 경험을 쌓아왔습니다.</p>
-      <p>오버엔지니어링을 지양하고, 운영 데이터로 검증하며 단계적으로 결정합니다. 한 번에 완벽한 해답을 찾기보다, 작게 도입한 뒤 한계가 드러나는 지점을 다음 단계의 근거로 삼아 구조를 발전시켜 왔습니다.</p>
+<!--      <p>오버엔지니어링을 지양하고, 운영 데이터로 검증하며 단계적으로 결정합니다. 한 번에 완벽한 해답을 찾기보다, 작게 도입한 뒤 한계가 드러나는 지점을 다음 단계의 근거로 삼아 구조를 발전시켜 왔습니다.</p>-->
     </div>
   </div>
 </div>
@@ -300,7 +300,7 @@
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
       <ul>
-        <li><b>AWS:</b> EC2, ALB, ASG, S3, SQS, RDS</li>
+        <li><b>AWS:</b> EC2, ALB, ASG, S3, RDS, Lambda, SNS/SQS</li>
         <li><b>CI/CD:</b> Jenkins, Docker, GitHub Actions</li>
       </ul>
     </div>
@@ -338,8 +338,8 @@
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
       <ul>
-        <li>Claude Code 기반 개발 워크플로 구축. 코드 리뷰, SQL 검증, 테스트 생성 등 반복 업무 자동화</li>
-<!--        <li>도메인 지식, 코딩 컨벤션을 스킬로 정리해 팀 단위 재사용 가능한 형태로 운영</li>-->
+        <li>AI Agent 기반 코드 리뷰, 테스트 생성 등 반복 업무 자동화</li>
+<!--        <li>업무 지식과 컨벤션 등을 마크다운으로 정리해 팀 단위 재사용 가능한 형태로 운영</li>-->
       </ul>
     </div>
   </div>
@@ -404,13 +404,14 @@ flowchart TD
         </li>
         <li><b>정산 비동기 분리</b>
           <ul>
-            <li>결제/환불 커밋 이후, SNS 토픽에 이벤트 발행 → 정산 서버가 구독 SQS로 컨슘</li>
+            <li>결제/환불 커밋 이후, SNS 토픽에 이벤트 발행 → 정산 서버가 구독. SQS로 컨슘</li>
             <li>청구서 ID 기반 멱등성 처리로 중복 정산을 방지, 처리 실패 시 DLQ를 통한 관리</li>
           </ul>
         </li>
-        <li><b>테스트로 도메인 정확성 보장</b>
+        <li><b>마이그레이션 검증 및 테스트 관리</b>
           <ul>
-            <li>단위와 통합 테스트 300개 이상 작성, <mark>커버리지 95%</mark> 유지</li>
+            <li>목표 SLO인 99.9% 유지를 위해 배포 전, 카나리를 통한 트래픽 모니터링 검증</li>
+            <li>결제 서비스 내 단위와 통합 테스트 300개 이상 작성, <mark>커버리지 95%</mark> 유지</li>
           </ul>
         </li>
       </ul>
@@ -425,7 +426,7 @@ flowchart TD
 
   <div class="row clearfix layout layout-left border-no">
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>지역 조회 최적화</h4>
+      <h4>킥보드 운영 지역 조회 최적화</h4>
       <p>RDS 장애 해소, 조회 속도 6s → 0.4s</p>
       <p class="stack">[디어코퍼레이션] Java 17, Spring Boot, Redis, MySQL 5.7</p>
       <div class="mermaid-side">
@@ -458,7 +459,7 @@ flowchart TB
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
       <p class="sub-section">프로젝트 개요</p>
-      <p>지도 조회 API가 RDS CPU를 포화시켜 Timeout이 발생하고, 공유 DB를 쓰는 전체 서비스 장애로 확산. 캐싱으로 당장의 부하를 걷어낸 뒤, 최종적으로 조회 범위 자체를 줄여 원인을 제거</p>
+      <p>킥보드 앱의 지도 조회 API가 RDS CPU를 포화시켜 Timeout이 발생하고, 공유 DB를 쓰는 전체 서비스 장애로 확산. 캐싱으로 당장의 부하를 걷어낸 뒤, 최종적으로 조회 범위 자체를 줄여 원인을 제거</p>
 
       <p class="sub-section">팀 구성 및 역할</p>
       <ul>
@@ -505,7 +506,7 @@ flowchart TB
       <p class="sub-section">기여 성과</p>
       <ul>
         <li>처리 속도 <mark>6s → 0.4s</mark> (15배 개선)</li>
-        <li>조회 범위 축소로 Full Scan 원인을 제거, <mark>RDS 사용량 56% 절감</mark>으로 장애 재발 차단</li>
+        <li>조회 범위 축소로 Full Scan 원인을 제거, <mark>RDS 사용량 36% 절감</mark>으로 장애 재발 차단</li>
       </ul>
     </div>
   </div>
@@ -719,7 +720,7 @@ flowchart TB
 
 <!-- ===== 푸터 ===== -->
 <div class="container footer-container">
-  <p>Last updated: 2026.07.03</p>
+  <p>Last updated: 2026.07.06</p>
 </div>
 
 <script>
