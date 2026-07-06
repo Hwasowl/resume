@@ -332,17 +332,17 @@
     </div>
   </div>
 
-  <div class="row clearfix layout layout-left border-no">
-    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>개발 생산성</h4>
-    </div>
-    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">
-      <ul>
-        <li>AI Agent 기반 코드 리뷰, 테스트 생성 등 반복 업무 자동화</li>
-<!--        <li>업무 지식과 컨벤션 등을 마크다운으로 정리해 팀 단위 재사용 가능한 형태로 운영</li>-->
-      </ul>
-    </div>
-  </div>
+<!--  <div class="row clearfix layout layout-left border-no">-->
+<!--    <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">-->
+<!--      <h4>개발 생산성</h4>-->
+<!--    </div>-->
+<!--    <div class="col-xs-12 col-sm-8 col-md-9 col-print-12 content">-->
+<!--      <ul>-->
+<!--&lt;!&ndash;        <li>AI Agent 기반 테스트 작성, 리뷰 등 반복 업무 자동화</li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li>업무 지식과 컨벤션 등을 마크다운으로 정리해 팀 단위 재사용 가능한 형태로 운영</li>&ndash;&gt;-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 
 <div class="container list-container">
@@ -426,7 +426,7 @@ flowchart TD
 
   <div class="row clearfix layout layout-left border-no">
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      <h4>킥보드 운영 지역 조회 최적화</h4>
+      <h4>킥보드 지역 조회 최적화</h4>
       <p>RDS 장애 해소, 조회 속도 6s → 0.4s</p>
       <p class="stack">[디어코퍼레이션] Java 17, Spring Boot, Redis, MySQL 5.7</p>
       <div class="mermaid-side">
@@ -441,19 +441,16 @@ flowchart TB
     subgraph STORE["공유 저장소"]
       direction LR
       RD[("공유 Redis<br/>TTL")]
-      LK["Redis 분산락"]
       DB2[("공유 DB")]
     end
     GW2 -->|DB 저장| DB2
     GW2 -->|Write Through| RD
     LB2 -->|캐시 조회| RD
-    RD -.->|미스 시| LK
-    LK -->|DB 조회| DB2
+    RD -.->|미스 시 DB 조회| DB2
     DB2 -->|캐시 채움| RD
     style APP fill:none,stroke:#cccccc
     style STORE fill:none,stroke:#cccccc
     style RD fill:#fff3a3
-    style LK fill:#e3f2fd
         </div>
       </div>
     </div>
@@ -490,7 +487,6 @@ flowchart TB
         <li><b>2단계: Redis 글로벌 캐싱</b>
           <ul>
             <li>Write Through + TTL 설정으로 지역 데이터 관리</li>
-            <li>TTL 만료 시 동시 요청이 DB로 몰리는 캐시 스탬피드를, 분산 락으로 잡으며 방지</li>
             <li>WAS 간 일관성 확보로 캐시 불일치 해소</li>
             <li>다만 지속적인 가맹점 증가로 응답 크기가 커지며 프론트 렌더링 지연 발생</li>
           </ul>
